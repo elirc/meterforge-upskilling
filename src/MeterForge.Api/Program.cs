@@ -4,6 +4,7 @@ using MeterForge.Api.Entitlements;
 using MeterForge.Api.Errors;
 using MeterForge.Api.Integrations;
 using MeterForge.Api.Invoicing;
+using MeterForge.Api.Learning;
 using MeterForge.Api.Payments;
 using MeterForge.Api.Pricing;
 using MeterForge.Api.Rating;
@@ -43,6 +44,9 @@ app.Use(async (context, next) =>
     await next(context).ConfigureAwait(false);
 });
 if (app.Environment.IsDevelopment() || app.Environment.IsEnvironment("Testing")) app.MapOpenApi();
+app.UseDefaultFiles();
+app.UseStaticFiles();
+app.MapLearningEndpoints();
 app.MapGet("/health/live", () => Results.Ok(new { status = "healthy" }));
 app.MapGet("/health/ready", () => Results.Ok(new
 {

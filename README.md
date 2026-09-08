@@ -1,6 +1,16 @@
 # MeterForge
 
-MeterForge is a complete fifteen-sprint C#/.NET teaching repository for a fictional multi-tenant usage-based subscription billing platform. It is designed to help a junior software engineer grow toward mid-level ownership through business rules, API design, persistence, concurrency, integrations, testing, and operations.
+MeterForge is a fifteen-sprint C#/.NET teaching repository for a fictional multi-tenant usage-based subscription billing platform, with an extended junior-to-mid/senior learning pathway. Practice business rules, API design, persistence, concurrency, integrations, testing, operations, and the judgment needed to own changes across a team.
+
+## Start learning
+
+New to programming? Start with [find your starting point](<astra docs/start-here.md>) and the [five beginner lessons](<astra docs/foundations/README.md>). They teach code reading, debugging, requests, tests, and small changes before the advanced billing labs. The [upskilling review](<astra docs/UPSKILLING-REVIEW.md>) explains this learning-focused revision.
+
+Run the API and open [the learning workspace](http://localhost:5012/learn/) for searchable reading, exercises, browser-local progress, and notes. Start with the [first session](<astra docs/first-session.md>) for exact setup and a working API exercise.
+
+The [Astra learning handbook](<astra docs/README.md>) adds a staged [learning path](<astra docs/learning-path.md>), an evidence-based [competency matrix](<astra docs/competency-matrix.md>), a [codebase tour](<astra docs/codebase-tour.md>), [hands-on labs](<astra docs/labs/README.md>), and reusable review templates. The [change report](<astra docs/CHANGE-REPORT.md>) records this expansion and its verification.
+
+Progress means explaining a guarantee, reproducing a failure, implementing a bounded change, and defending it in review. Completing readings alone does not demonstrate role readiness.
 
 It is an original educational product—not a Stripe clone, payment processor, accounting system, or production financial service. All tenants, providers, money flows, and policies are synthetic fixtures.
 
@@ -58,13 +68,13 @@ The repository pins .NET 10 in `global.json`.
 
 ```powershell
 dotnet restore MeterForge.slnx --locked-mode
-dotnet run --project src/MeterForge.Api
+dotnet run --project src/MeterForge.Api --launch-profile http
 dotnet test MeterForge.slnx --configuration Release
 ```
 
 OpenAPI is available at `/openapi/v1.json` in Development. Check `/health/live` and `/health/ready`; readiness explicitly reports that the default runtime uses non-durable in-memory adapters. `docker compose up postgres` starts the local database used by the PostgreSQL adapter exercise.
 
-Start with the [learner guide](LEARNER-GUIDE.md), [testing guide](TESTREADME.md), [over-engineering review](OEReadMe.md), and [production-readiness assessment](docs/quality/PRODUCTION-READINESS.md).
+Start with the [learner guide](LEARNER-GUIDE.md), [testing guide](TESTREADME.md), [over-engineering review](OEReadMe.md), and [production-readiness assessment](docs/quality/PRODUCTION-READINESS.md). Documentation links can be checked without .NET: `python tools/check_docs.py`.
 
 ## Limits
 

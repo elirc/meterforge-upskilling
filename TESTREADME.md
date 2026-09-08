@@ -53,3 +53,17 @@ dotnet list MeterForge.slnx package --vulnerable --include-transitive
 ```
 
 When CI fails, read the first meaningful failure, reproduce the focused project or class, and fix the owning boundary. Treat test code as maintained product code: clear reason, minimal setup, no hidden network, and useful failure output.
+
+## Learning workspace checks
+
+The [learning portal tests](tests/MeterForge.Api.Tests/Learning/LearningPortalTests.cs) protect the new entry route, static assets, embedded document catalog, plain-text responses, and rejection of paths outside that catalog. These tests exercise HTTP hosting; they do not prove browser persistence or keyboard behavior.
+
+```powershell
+python tools/check_docs.py
+dotnet test tests/MeterForge.Api.Tests --filter FullyQualifiedName~LearningPortalTests
+node --check src/MeterForge.Api/wwwroot/learn/app.js
+```
+
+The Python standard-library check validates local inline Markdown file/directory links, including paths with spaces. It ignores code fences, external URLs, and heading fragments. It runs in CI before the .NET checks. It is navigation evidence, not an assessment of the accuracy of a document's claims.
+
+For interactive behavior, the optional [browser smoke check](tools/check_learning_portal.cjs) uses an existing Playwright installation and a running API. It checks the beginner starting stage, reasoning feedback without completion credit, practice evidence, search/stage filters, review progress, persistence after reload, old and new notebook export/import, invalid-backup rejection, every catalog document, related-guide navigation, document HTML handling, and mobile overflow. It uses an isolated browser context and mocks one response to test unsafe Markdown. See [portal maintenance](<astra docs/portal-maintenance.md>) for the reproducible command and dependency setup. These browser checks run separately from the .NET CI suite.
